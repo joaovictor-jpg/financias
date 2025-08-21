@@ -11,7 +11,7 @@ export default function Home() {
             <TrendingUp className="w-10 h-10 text-white" />
           </div>
           <h1 className="text-4xl font-bold text-gray-600 mb-4">
-            Jota's Financias
+            Jota&apos;s Financias
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Conjunto completo de interfaces modernas e tecnologias para seu sistema financeiro pessoal

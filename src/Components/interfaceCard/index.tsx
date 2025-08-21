@@ -1,14 +1,15 @@
 import { Eye } from 'lucide-react';
+import Link from 'next/link';
 import React from 'react';
 
-type InterfaceCardProps ={
+type InterfaceCardProps = {
     icon: React.ReactNode;
     title: string;
     description: string;
     buttonTitle: string;
 }
 
-export const InterfaceCard = ({icon, title, description, buttonTitle}: InterfaceCardProps) => {
+export const InterfaceCard = ({ icon, title, description, buttonTitle }: InterfaceCardProps) => {
     return (
         <div className="flex w-full max-w-md flex-col gap-4 rounded-2xl bg-white p-6 shadow-md">
             <div className="flex items-center gap-4">
@@ -19,10 +20,14 @@ export const InterfaceCard = ({icon, title, description, buttonTitle}: Interface
             </div>
 
             <p className='text-gray-500'>{description}</p>
-            <button className='mt-2 flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-3 text-sm text-semibold text-white transition-colors hover:bg-slate-700 cursor-pointer'>
-                <Eye size={16} />
-                {buttonTitle}
-            </button>
+            <div className="mt-auto cursor-pointer">
+                <Link href="/login">
+                    <div className="flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-slate-700">
+                        <Eye size={16} />
+                        {buttonTitle}
+                    </div>
+                </Link>
+            </div>
         </div>
     );
 };
