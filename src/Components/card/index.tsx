@@ -5,9 +5,9 @@ type ModernCardProps = {
     children: React.ReactNode;
 }
 
-export const Card = ({title, description, children}: ModernCardProps) => {
+export const Card = ({ title, description, children }: ModernCardProps) => {
     return (
-        <div className="max-w-sm  rounded-2xl bg-white p-3">
+        <div className="max-w-sm  rounded-2xl bg-white p-3 border-0 shadow-lg hover:shadow-xl transition-all duration-300 group">
             <div className="flex flex-col items-center text-center">
                 <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-100">
                     {children}

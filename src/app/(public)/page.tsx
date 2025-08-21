@@ -1,5 +1,6 @@
 import { Card } from '@/Components/card';
-import { Eye, PieChart, TrendingUp } from 'lucide-react';
+import { InterfaceCard } from '@/Components/interfaceCard';
+import { Eye, LogIn, PieChart, Receipt, Tag, TrendingUp, UserPlus } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -31,6 +32,13 @@ export default function Home() {
           <Card title='Design Moderno' description='Interfaces limpas e elegantes com gradientes sutis e elementos visuais modernos'>
             <PieChart className="h-8 w-8 text-purple-500" />
           </Card>
+        </div>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+          <InterfaceCard icon={<LogIn className='text-white'></LogIn>} title='Tela de Login' description='Interface de authenticação com design moderno' buttonTitle='Visualizar Interface' />
+          <InterfaceCard icon={<UserPlus className='text-white'></UserPlus>} title='Tela de Cadastro' description='Formulário de criação de conta elegante' buttonTitle='Visualizar Interface' />
+          <InterfaceCard icon={<PieChart className='text-white'></PieChart>} title='Tela de Cadastro' description='Visualização completa de orçamentos e meta' buttonTitle='Visualizar Interface' />
+          <InterfaceCard icon={<Tag className='text-white'></Tag>} title='Tela de Cadastro' description='Organize transações por categorias' buttonTitle='Visualizar Interface' />
+          <InterfaceCard icon={<Receipt className='text-white'></Receipt>} title='Tela de Cadastro' description='movimentações financeiras' buttonTitle='Visualizar Interface' />
         </div>
       </div>
     </article>
