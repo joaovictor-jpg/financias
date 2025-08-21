@@ -1,4 +1,5 @@
-import { TrendingUp } from 'lucide-react';
+import { Card } from '@/Components/card';
+import { Eye, PieChart, TrendingUp } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -19,6 +20,17 @@ export default function Home() {
               5 Interfaces Prontas para Uso
             </p>
           </div>
+        </div>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-12'>
+          <Card title='Design Moderno' description='Interfaces limpas e elegantes com gradientes sutis e elementos visuais modernos'>
+            <Eye className="h-8 w-8 text-blue-500" />
+          </Card>
+          <Card title='Design Moderno' description='Interfaces limpas e elegantes com gradientes sutis e elementos visuais modernos'>
+            <TrendingUp className="h-8 w-8 text-emerald-500" />
+          </Card>
+          <Card title='Design Moderno' description='Interfaces limpas e elegantes com gradientes sutis e elementos visuais modernos'>
+            <PieChart className="h-8 w-8 text-purple-500" />
+          </Card>
         </div>
       </div>
     </article>
