@@ -1,14 +1,37 @@
+'use client';
+
 import { Lock, Mail } from 'lucide-react';
-import { Campo } from './campo';
 import Link from 'next/link';
+import { useState } from 'react';
+import { authentication } from './action';
+import { Campo } from './campo';
 
 export const Form = () => {
+
+    const [message, setMessage] = useState<string | null>(null);
+
+    const handleLogin = async (formData: FormData) => {
+        await authentication(formData);
+    };
+
     return (
-        <form className='flex flex-col gap-5'>
-            <Campo label='email' type='email' placeholder="seu@email.com" Icon={<Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} />}>
+        <form action={handleLogin} className='flex flex-col gap-5'>
+            <Campo 
+                label='email'
+                type='email'
+                name='email'
+                placeholder="seu@email.com"
+                Icon={<Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} />}
+            >
                 Email
             </Campo>
-            <Campo label='password' type='password' placeholder="••••••••" Icon={<Lock className='absolute left-3 top-1/2 -translate-y-1/2 text-slate-400' size={20} />}>
+            <Campo
+                label='password'
+                type='password'
+                name='password'
+                placeholder="••••••••"
+                Icon={<Lock className='absolute left-3 top-1/2 -translate-y-1/2 text-slate-400' size={20} />}
+            >
                 Senha
             </Campo>
             <Link href="#" className='text-sm font-medium text-black'>Esqueceu a senha</Link>
@@ -18,6 +41,8 @@ export const Form = () => {
             >
                 Entrar
             </button>
+
+            {message && <p className='mt-2 text-sm text-red-500'>{message}</p>}
         </form >
     );
 };

@@ -1,19 +1,31 @@
 
 type CampoPrps = {
     label: string;
-    type:string;
+    type: string;
+    name: string;
     placeholder: string;
-    children: string
+    children: React.ReactNode;
     Icon: React.ReactNode;
 }
 
-export const Campo = ({label, type, placeholder, children, Icon}: CampoPrps) => {
+export const Campo = ({label, type, name, placeholder, children, Icon}: CampoPrps) => {
     return (
         <div>
-            <label htmlFor={label} className='mb-2 block text-sm font-medium text-slate-600 cursor-pointer'>{children}</label>
+            <label
+                htmlFor={label}
+                className='mb-2 block text-sm font-medium text-slate-600 cursor-pointer'
+            >
+                {children}
+            </label>
             <div className='relative'>
                 {Icon}
-                <input type={type} id={label} className='w-full rounded-lg border border-slate-200 bg-slate-50 p-3 pl-10 text-slate-700 transition-color focus:border-blue-500 focus:outline-none focus:ring-l focus:ring-blue-500' placeholder={placeholder} />
+                <input
+                    type={type}
+                    id={label}
+                    name={name}
+                    className='w-full rounded-lg border border-slate-200 bg-slate-50 p-3 pl-10 text-slate-700 transition-color focus:border-blue-500 focus:outline-none focus:ring-l focus:ring-blue-500'
+                    placeholder={placeholder}
+                />
             </div>
         </div>
     );
