@@ -1,47 +1,22 @@
 'use server';
 
+import { post } from '@/api/api';
+import { loginSchema } from '@/api/schemas/login';
+import { signupSchema } from '@/api/schemas/signu';
+import { validatedFormData } from '@/api/validations/validatedFormData';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { z } from 'zod';
-
-const loginSchema = z.object({
-    email: z.string().email({ message: 'Por favor, insira um E-Mail Válido.' }),
-    password: z.string().min(1, { message: 'A senha não pode estar em branco.' })
-});
-
-const signupSchema = z.object({
-    name: z.string().min(1, { message: 'O nome é obrigatório.' }),
-    email: z.string().email({ message: 'Por favor, insira um email válido.' }),
-    password: z.string().min(8, { message: 'A senha deve ter no mínimo 8 caracteres.' }),
-    confirmPassword: z.string().min(1, { message: 'A confirmação de senha é obrigatória.' }),
-    role: z.enum(['USER', 'ADMIN'], {
-        message: 'Selecione um tipo de perfil válido.'
-    })
-}).refine((data) => data.password === data.confirmPassword, {
-    message: 'As senhas não coincidem.',
-    path: ['confirmPassword']
-});
 
 export async function login(formData: FormData) {
-    const validatedFields = loginSchema.safeParse(Object.fromEntries(formData.entries()));
+    const result = await validatedFormData(formData, loginSchema);
 
-    if (!validatedFields.success) {
-        return {
-            errors: validatedFields.error.flatten().fieldErrors,
-            message: 'Dados inválidos'
-        };
-    }
+    if (result.errors) return result;
 
-    const { email, password } = validatedFields.data;
+    const { email, password } = result.data;
+
 
     try {
-        const response = await fetch(`${process.env.BACKEND_API_URL}/users/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, password })
-        });
+        const response = await post('/users/login', { email, password });
 
         if (!response.ok) {
             const errorText = await response.text();
@@ -71,28 +46,16 @@ export async function login(formData: FormData) {
 }
 
 export async function signup(formData: FormData) {
-    const validatedFields = signupSchema.safeParse(Object.fromEntries(formData.entries()));
+    const result = await validatedFormData(formData, signupSchema);
 
-    if (!validatedFields.success) {
-        return {
-            errors: validatedFields.error.flatten().fieldErrors,
-            message: 'Dados inválidos. Por favor, corrija os campos.'
-        };
-    }
+    if (result.errors) return result;
 
-    const { name, email, password, role } = validatedFields.data;
+    const { name, email, password, role } = result.data;
 
     try {
-        const result = await fetch(`${process.env.BACKEND_API_URL}/users/signup`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name, email, password, role })
-        });
-
-        if (!result.ok) {
-            const errorText = await result.text();
+        const response = await post('/users/signup', { name, email, password, role });
+        if (!response.ok) {
+            const errorText = await response.text();
             try {
                 const errorData = JSON.parse(errorText);
                 return { message: errorData.message || 'Ocorreu um erro no cadastro.' };
