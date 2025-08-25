@@ -6,9 +6,10 @@ type CampoPrps = {
     placeholder: string;
     children: React.ReactNode;
     Icon: React.ReactNode;
+    errors?: string[];
 }
 
-export const Campo = ({label, type, name, placeholder, children, Icon}: CampoPrps) => {
+export const Campo = ({label, type, name, placeholder, children, Icon, errors}: CampoPrps) => {
     return (
         <div>
             <label
@@ -27,6 +28,9 @@ export const Campo = ({label, type, name, placeholder, children, Icon}: CampoPrp
                     placeholder={placeholder}
                 />
             </div>
+            {errors && (
+                <p className="mt-1 text-sm text-red-600">{errors[0]}</p>
+            )}
         </div>
     );
 };

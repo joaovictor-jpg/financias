@@ -7,9 +7,10 @@ type InterfaceCardProps = {
     title: string;
     description: string;
     buttonTitle: string;
+    rota: string
 }
 
-export const InterfaceCard = ({ icon, title, description, buttonTitle }: InterfaceCardProps) => {
+export const InterfaceCard = ({ icon, title, description, buttonTitle, rota }: InterfaceCardProps) => {
     return (
         <div className="flex w-full max-w-md flex-col gap-4 rounded-2xl bg-white p-6 shadow-md">
             <div className="flex items-center gap-4">
@@ -21,7 +22,7 @@ export const InterfaceCard = ({ icon, title, description, buttonTitle }: Interfa
 
             <p className='text-gray-500'>{description}</p>
             <div className="mt-auto cursor-pointer">
-                <Link href="/login">
+                <Link href={rota}>
                     <div className="flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-slate-700">
                         <Eye size={16} />
                         {buttonTitle}

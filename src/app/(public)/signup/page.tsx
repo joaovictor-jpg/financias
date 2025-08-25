@@ -1,18 +1,19 @@
 import { Form } from '@/Components/form';
 import { Campo } from '@/Components/form/campo';
-import { Mail, TrendingUp, Lock } from 'lucide-react';
+import { Select } from '@/Components/form/select';
+import { Mail, TrendingUp, Lock, User } from 'lucide-react';
 import Link from 'next/link';
 
-export default function Login() {
+export default function signup() {
     return (
         <main className='flex min-h-screen w-full flex-col items-center justify-center bg-slate-50 p-4'>
             <div className="flex flex-grow flex-col items-center justify-center gap-4">
                 <div className="flex flex-col items-center gap-3 text-center">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500 to-green-600 shadow-lg">
                         <TrendingUp size={32} className="text-white" />
                     </div>
                     <h1 className='text-3xl font-bold text-slate-800'>Jota&apos;s Finance</h1>
-                    <p className='text-slate-500'>Gerencie suas finanças com inteligência</p>
+                    <p className='text-slate-500'>Comece sua jornada financeira hoje</p>
                 </div>
 
                 <div className='mt-8 w-full max-w-md rounded-2xl bg-white p-8 shadow-xl'>
@@ -20,7 +21,16 @@ export default function Login() {
                         <h2 className='text-2xl font-bold text-slate-800'>Fazer Login</h2>
                         <p className='text-slate-500'>Entre na sua conta para acessar o dashboard</p>
                     </div>
-                    <Form type='login'>
+                    <Form type='signup'>
+                        <Campo
+                            label='name'
+                            type='text'
+                            name='name'
+                            placeholder="Seu nome completo"
+                            Icon={<User className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} />}
+                        >
+                            nome
+                        </Campo>
                         <Campo
                             label='email'
                             type='email'
@@ -39,10 +49,19 @@ export default function Login() {
                         >
                             Senha
                         </Campo>
-                        <Link href="#" className='text-sm font-medium text-black'>Esqueceu a senha</Link>
+                        <Campo
+                            label='confirmPassword'
+                            type='password'
+                            name='confirmPassword'
+                            placeholder="••••••••"
+                            Icon={<Lock className='absolute left-3 top-1/2 -translate-y-1/2 text-slate-400' size={20} />}
+                        >
+                            Confirma senha
+                        </Campo>
+                        <Select name='role' />
                         <button
                             type="submit"
-                            className="mt-4 w-full rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 py-3 font-semibold text-white shadow-md transition-transform hover:scale-105"
+                            className="mt-4 w-full rounded-lg bg-gradient-to-r from-green-500 to-green-600 py-3 font-semibold text-white shadow-md transition-transform hover:scale-105"
                         >
                             Entrar
                         </button>
@@ -53,13 +72,13 @@ export default function Login() {
                         <hr className='w-full border-t border-slate-200' />
                     </div>
                     <p className='text-center text-sm text-slate-500'>
-                        Não tem uma conta?{' '}
-                        <Link href='/signup' className='font-semibold text-black hover:underline'>
-                            criar conta
+                        Já tem uma conta?{' '}
+                        <Link href='/login' className='font-semibold text-black hover:underline'>
+                            Fazer login
                         </Link>
                     </p>
                 </div>
             </div>
         </main>
     );
-};
+}
