@@ -1,9 +1,5 @@
 import { ZodType } from 'zod';
 
-type FieldErrors = {
-    [key: string]: string[];
-};
-
 export async function validatedFormData<T>(formData: FormData, schema: ZodType<T>) {
     const data = Object.fromEntries(formData.entries());
     const validatedFields = schema.safeParse(data);

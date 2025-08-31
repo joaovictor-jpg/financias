@@ -26,6 +26,7 @@ export const Campo = ({label, type, name, placeholder, children, Icon, errors}: 
                     name={name}
                     className='w-full rounded-lg border border-slate-200 bg-slate-50 p-3 pl-10 text-slate-700 transition-color focus:border-blue-500 focus:outline-none focus:ring-l focus:ring-blue-500'
                     placeholder={placeholder}
+                    required
                 />
             </div>
             {errors && (

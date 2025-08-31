@@ -7,11 +7,10 @@ import { validatedFormData } from '@/api/validations/validatedFormData';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-export async function login(formData: FormData) {
+export async function login(formData: FormData): Promise<FormError | undefined> {
     const result = await validatedFormData(formData, loginSchema);
 
     if (result.errors) {
-        console.log(result.errors);
         return result;
     };
 
@@ -45,10 +44,10 @@ export async function login(formData: FormData) {
         return { message: 'Não foi possivel conectar ao servidor. Tente novamente mais tarde.' };
     }
 
-    redirect('/');
+    redirect('/dashboard');
 }
 
-export async function signup(formData: FormData) {
+export async function signup(formData: FormData): Promise<FormError | undefined> {
     const result = await validatedFormData(formData, signupSchema);
 
     if (result.errors) {
@@ -64,6 +63,7 @@ export async function signup(formData: FormData) {
             const errorText = await response.text();
             try {
                 const errorData = JSON.parse(errorText);
+                console.log(errorData);
                 return { message: errorData.message || 'Ocorreu um erro no cadastro.' };
             } catch {
                 return { message: errorText || 'Ocorreu um erro no cadastro.' };
