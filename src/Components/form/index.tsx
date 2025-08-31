@@ -8,6 +8,12 @@ type formProps = {
     children: React.ReactNode;
 }
 
+type resultProps = {
+    data?: undefined;
+    messagem: string | null;
+    errors: { [key: string]: string[] | undefined }
+}
+
 export const Form = ({ type, children }: formProps) => {
 
     const [message, setMessage] = useState<string | null>(null);
@@ -17,13 +23,11 @@ export const Form = ({ type, children }: formProps) => {
             const result = await login(formData);
 
             if (result && result.message) {
-                console.log(result.errors);
                 setMessage(result.message);
             }
         } else if (type === 'signup') {
             const result = await signup(formData);
             if (result && result.message) {
-                console.log(result.errors);
                 setMessage(result.message);
             }
         }

@@ -10,7 +10,10 @@ import { redirect } from 'next/navigation';
 export async function login(formData: FormData) {
     const result = await validatedFormData(formData, loginSchema);
 
-    if (result.errors) return result;
+    if (result.errors) {
+        console.log(result.errors);
+        return result;
+    };
 
     const { email, password } = result.data;
 
@@ -48,7 +51,10 @@ export async function login(formData: FormData) {
 export async function signup(formData: FormData) {
     const result = await validatedFormData(formData, signupSchema);
 
-    if (result.errors) return result;
+    if (result.errors) {
+        console.log(result.errors);
+        return result;
+    };
 
     const { name, email, password, role } = result.data;
 
