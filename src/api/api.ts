@@ -1,9 +1,12 @@
 export async function post(endpoint: string, data: Record<string, string>) {
-    return await fetch(`${process.env.BACKEND_API_URL}${endpoint}`, {
+    const result = await fetch(`${process.env.BACKEND_API_URL}${endpoint}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
     });
+
+    console.log(result);
+    return result;
 }

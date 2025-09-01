@@ -63,15 +63,15 @@ export async function signup(formData: FormData): Promise<FormError | undefined>
             const errorText = await response.text();
             try {
                 const errorData = JSON.parse(errorText);
-                console.log(errorData);
+                console.log('Erro da API: ', errorData);
                 return { message: errorData.message || 'Ocorreu um erro no cadastro.' };
             } catch {
                 return { message: errorText || 'Ocorreu um erro no cadastro.' };
             }
         }
+        redirect('/login');
     } catch (error) {
         console.log('Erro de rede ou na API;', error);
         return { message: 'Não foi possivel conectar ao servidor. Tente novamente mais tarde.' };
     }
-    redirect('/login');
 }
