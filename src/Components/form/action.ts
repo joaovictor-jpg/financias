@@ -40,7 +40,6 @@ export async function login(formData: FormData): Promise<FormError | undefined> 
             sameSite: 'strict'
         });
     } catch (error) {
-        console.log('Error de rede ou na API;', error);
         return { message: 'Não foi possivel conectar ao servidor. Tente novamente mais tarde.' };
     }
 
@@ -51,7 +50,6 @@ export async function signup(formData: FormData): Promise<FormError | undefined>
     const result = await validatedFormData(formData, signupSchema);
 
     if (result.errors) {
-        console.log(result.errors);
         return result;
     };
 
@@ -63,7 +61,6 @@ export async function signup(formData: FormData): Promise<FormError | undefined>
             const errorText = await response.text();
             try {
                 const errorData = JSON.parse(errorText);
-                console.log('Erro da API: ', errorData);
                 return { message: errorData.message || 'Ocorreu um erro no cadastro.' };
             } catch {
                 return { message: errorText || 'Ocorreu um erro no cadastro.' };
@@ -71,7 +68,6 @@ export async function signup(formData: FormData): Promise<FormError | undefined>
         }
         redirect('/login');
     } catch (error) {
-        console.log('Erro de rede ou na API;', error);
         return { message: 'Não foi possivel conectar ao servidor. Tente novamente mais tarde.' };
     }
 }

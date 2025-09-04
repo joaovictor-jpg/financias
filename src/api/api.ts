@@ -6,7 +6,5 @@ export async function post(endpoint: string, data: Record<string, string>) {
         },
         body: JSON.stringify(data)
     });
-
-    console.log(result);
     return result;
 }
